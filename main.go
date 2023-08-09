@@ -1,9 +1,10 @@
 package main
 
 import (
-	"api/controllers"
-	"api/models"
 	"net/http"
+
+	"github.com/IncredibleMe/goapi/controllers"
+	"github.com/IncredibleMe/goapi/models"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,20 +1,19 @@
 package controllers
 
 import (
-	"api/models"
-	"models"
 	"net/http"
-	"models"
+
+	"github.com/IncredibleMe/goapi/models"
 	"github.com/gin-gonic/gin"
 )
 
 type CreateThemaInput struct {
 	Onoma   string            `json:"onoma" binding:"required"`
 	Patriko string            `json:"patriko" binding:"required"`
-	Status  models.status.StatusName `json:"status" binding:"required"`
+	Status  models.StatusName `json:"status" binding:"required"`
 }
 
-func CreateThema(c *gin.Context) {
+func PostThema(c *gin.Context) {
 	// Validate input
 	var input CreateThemaInput
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -22,8 +21,9 @@ func CreateThema(c *gin.Context) {
 		return
 	}
 
+	var const_patriko string = "patriko"
 	// Create book
-	book := models.Thema{Onoma: input.Onoma, Patriko: "patriko", Status: input.Status}
+	book := models.Thema{Onoma: input.Onoma, Patriko: const_patriko, Status: input.Status}
 	models.DB.Create(&book)
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
